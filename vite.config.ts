@@ -4,8 +4,8 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // ✅ This fixes missing CSS/JS issue on Render
-  resolve: {
+  base: './', // ✅ ensures assets load correctly on Render
+  resolve: {  // ✅ your alias & extensions must be inside "resolve"
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       'vaul@1.1.2': 'vaul',
