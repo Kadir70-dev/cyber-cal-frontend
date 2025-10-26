@@ -4,10 +4,11 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // ✅ ensures assets load correctly on Render
-  resolve: {  // ✅ your alias & extensions must be inside "resolve"
+  base: '/', // ✅ this must be "/" for SPA routing on Render
+  resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
+      '@': path.resolve(__dirname, './src'),
       'vaul@1.1.2': 'vaul',
       'sonner@2.0.3': 'sonner',
       'recharts@2.15.2': 'recharts',
@@ -45,8 +46,7 @@ export default defineConfig({
       '@radix-ui/react-avatar@1.1.3': '@radix-ui/react-avatar',
       '@radix-ui/react-aspect-ratio@1.1.2': '@radix-ui/react-aspect-ratio',
       '@radix-ui/react-alert-dialog@1.1.6': '@radix-ui/react-alert-dialog',
-      '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion',
-      '@': path.resolve(__dirname, './src'),
+      '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion'
     },
   },
   build: {
