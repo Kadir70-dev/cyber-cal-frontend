@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -36,7 +36,9 @@ function HomePage({ sessions }: { sessions: Session[] }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
+      <Navbar onAdminClick={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
       <Hero />
       <CalendarView
         sessions={sessions}
@@ -127,7 +129,7 @@ function AppRoutes({
   // 🔧 CRUD Handlers
   const handleEdit = async (session: Session) => {
     try {
-      const res = await fetch(`${API_BASE}/api/sessions/${session._id}`, {
+      const res = await fetch(`${API_BASE}/api/sessions/${session.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch session");
@@ -140,7 +142,7 @@ function AppRoutes({
     }
   };
 
-  const handleAddSession = async (newSession: Omit<Session, "_id">) => {
+  const handleAddSession = async (newSession: Omit<Session, "id">) => {
     const res = await fetch(`${API_BASE}/api/sessions`, {
       method: "POST",
       headers: {
@@ -157,11 +159,12 @@ function AppRoutes({
   };
 
   const handleUpdateSession = async (updated: Session) => {
-    const res = await fetch(`${API_BASE}/api/sessions/${updated._id}`, {
+    const res = await fetch(`${API_BASE}/api/sessions/${updated.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+
       },
       body: JSON.stringify(updated),
     });

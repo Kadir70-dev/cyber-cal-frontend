@@ -72,7 +72,7 @@ export function SessionForm({
 
     if (editSession && onUpdateSession) {
       // ✅ Update mode
-      onUpdateSession({ ...payload, _id: editSession._id });
+      onUpdateSession({ ...payload, id: editSession.id });
       toast.success("Session updated successfully!");
     } else {
       // ✅ Create mode
@@ -142,7 +142,7 @@ export function SessionForm({
             <Label>Topic Category</Label>
             <Select
               value={formData.topic}
-              onValueChange={(value) =>
+              onValueChange={(value: string) =>
                 setFormData({ ...formData, topic: value })
               }
             >
